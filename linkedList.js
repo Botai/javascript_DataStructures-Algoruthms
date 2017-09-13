@@ -83,10 +83,31 @@ function LinkedList() {
             return null;
         }
     };
+
     // 返回元素在链表中的索引，如果链表中没有该元素返回 -1
-    this.indexOf = function(element) {};
+    this.indexOf = function(element) {
+        var current = head,
+            index = 0;
+
+        while (current) {
+            if (element === current.element) {
+                console.log('元素' + element + '的位置: ' + index);
+            }
+            index++;
+            current = current.next;
+        }
+        return -1
+    };
+
     // 链表长度大于 0 返回 false
-    this.isEmpty = function() {};
+    this.isEmpty = function() {
+        if (length === 0) {
+            console.log('空');
+        } else {
+            console.log('不为空');
+        }
+    };
+
     // 返回链表包含的元素个数
     this.size = function() {
         console.log('length: ' + length);
@@ -117,3 +138,4 @@ list.removeAt(1);
 list.toString();
 list.insert(1, 10);
 list.toString();
+list.indexOf(12);
