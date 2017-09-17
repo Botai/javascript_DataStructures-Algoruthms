@@ -20,7 +20,6 @@ function doubleLinkedList() {
                 previous,
                 index = 0;
 
-
             if (position === 0) {
                 // 在第一个位置添加
                 if (!head) {
@@ -33,9 +32,9 @@ function doubleLinkedList() {
                 }
             } else if (position === length) {
                 // 在最后一项插入
-                current = tail;
-                current.next = node;
-                node.prev = current;
+                // current = tail;
+                tail.next = node;
+                node.prev = tail;
                 tail = node;
             } else {
                 while (index++ < position) {
@@ -49,14 +48,48 @@ function doubleLinkedList() {
                 node.prev = previous;
             }
             length++;
-            console.log('在位置' + position + '添加值' + element + '成功！');
+            console.log('在位置 ' + position + ' 添加值 ' + element + ' 成功！');
         } else {
-            console.log('err!!!')
+            console.log('insert err!!!')
             return false;
         }
     }
+    this.removeAt = function(position) {
+            // 检查越界值
+            if (position > -1 && position < length) {
+                var current = head,
+                    previous,
+                    index = 0;
 
-    // 重写 toString() 方法
+                // 移除第一项
+                if (position === 0) {
+                    head = current.next;
+                    if (length === 1) {
+                        tail = null;
+                    } else {
+                        head.prev = null;
+                    }
+                } else if (position === length - 1) {
+                    current = tail;
+                    tail = current.prev;
+                    tail.next = null;
+                } else {
+                    while (index++ < position) {
+                        previous = current;
+                        current = current.next;
+                    }
+                    // 将 previous 与 current 的下一项连接起来， 跳过 current，从而移除
+                    previous.next = current.next;
+                    current.next.prev = previous;
+                }
+                length--;
+                console.log('在位置 ' + position + ' 删除 ' + current.element + ' 成功！');
+            } else {
+                console.log('remove err!!!!!')
+                return null;
+            }
+        }
+        // 重写 toString() 方法
     this.toString = function() {
         var current = head,
             string = '';
@@ -77,6 +110,6 @@ doubleList.insert(0, 2);
 doubleList.insert(0, 1);
 doubleList.insert(0, 4);
 doubleList.insert(3, 33);
-doubleList.insert(2, 22);
+doubleList.removeAt(3);
 
 doubleList.toString();
