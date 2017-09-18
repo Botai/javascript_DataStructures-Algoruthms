@@ -10,6 +10,28 @@ function doubleLinkedList() {
     var head = null;
     var tail = null;
 
+    this.append = function(element) {
+        var node = new Node(element),
+            current = head,
+            previous;
+
+        if (head === null) {
+            head = node;
+            tail = node;
+        } else {
+            current = head;
+            // 循环列表，直到找到最后一项
+            while (current.next) {
+                current = current.next;
+            }
+            // 找到最后一项，将其 next 赋值为 node，建立连接
+            current.next = node;
+            node.prev = current
+        }
+        // 更新列表长度
+        length++;
+    };
+
     this.insert = function(position, element) {
         // 检查越界值
 
@@ -106,10 +128,14 @@ function doubleLinkedList() {
 }
 
 var doubleList = new doubleLinkedList();
-doubleList.insert(0, 2);
-doubleList.insert(0, 1);
-doubleList.insert(0, 4);
-doubleList.insert(3, 33);
-doubleList.removeAt(3);
+doubleList.append(999);
+doubleList.append(888);
+doubleList.append(777);
+
+// doubleList.insert(0, 2);
+// doubleList.insert(0, 1);
+// doubleList.insert(0, 4);
+// doubleList.insert(3, 33);
+// doubleList.removeAt(3);
 
 doubleList.toString();
