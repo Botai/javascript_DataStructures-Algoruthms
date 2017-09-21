@@ -32,6 +32,7 @@ function Set() {
     }
 
     this.values = function() {
+        // 方法返回一个数组
         return Object.keys(items);
     }
 
