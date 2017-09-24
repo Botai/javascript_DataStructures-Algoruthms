@@ -66,8 +66,13 @@ function HashTable() {
         }
     }
 
+
+
+    // 搞不懂啊 =.= 搞不定了
+    console.log("处理冲突问题未解决！！！！！！！！！！！！！！！！！！！");
     // 处理冲突问题
     // 方法一：分离链接
+
     // 分离链接法包括为散列表的每一个位置创建一个链表并将存储在里面，它在 HashTable 实例之外还需要额外的存储空间
     var ValuePair = function(key, value) {
             this.key = key;
@@ -78,22 +83,23 @@ function HashTable() {
             }
         }
         // 重写 put get remove 方法
-    this.put = function(key, value) {
-        var position = loseloseHashCode(key);
 
-        if (table[position] == undefined) {
-            table[position] == new LinkedList();
-        }
-        table[postion].append(new ValuePair(key, value));
-    }
+    // this.put = function(key, value) {
+    //     var position = loseloseHashCode(key);
 
-    this.get = function(key) {
-        var position = loseloseHashCode(key);
+    //     if (table[position] == undefined) {
+    //         table[position] == new LinkedList();
+    //     }
+    //     table[postion].append(new ValuePair(key, value));
+    // }
 
-        if (table[position] !== undefined) {
-            var current = table[postion].getHead();
-        }
-    }
+    // this.get = function(key) {
+    //     var position = loseloseHashCode(key);
+
+    //     if (table[position] !== undefined) {
+    //         var current = table[postion].getHead();
+    //     }
+    // }
 
 }
 
@@ -109,9 +115,63 @@ hash.remove("person_1");
 console.log("person_1 是否存在：")
 console.log(hash.get("person_1"));
 
-console.log("---------------------------------");
+console.log("--------------------------方法1--------------------------");
 
 // 处理散列表中改的冲突
+hash.put("Tyrion", "1");
+hash.put("Aaron", "2");
+
+hash.put("Donnie", "1");
+hash.put("Ana", "2");
+
+hash.print();
+
+
+// ------------------------------------------------------
+
+
+function HashTable_2() {
+    var table = [];
+    // 方法二
+    // 无冲突
+    var djb2HashCode = function(key) {
+        // 初始化一个 hash 变量并赋值一个质数
+        var hash = 5381;
+        for (var i = 0; i < key.length; i++) {
+            // 将 hash 与33相乘，用来当做一个魔力数，并和当前迭代到的字符 ASCII 码值相加
+            hash = hash * 33 + key.charCodeAt(i);
+        }
+        return hash % 1013;
+    }
+    this.put = function(key, value) {
+        var position = djb2HashCode(key);
+        console.log(position + "-" + key);
+        table[position] = value;
+    };
+
+    this.get = function(key) {
+        return table[djb2HashCode(key)];
+    }
+
+    this.remove = function(key) {
+        table[djb2HashCode(key)] = undefined;
+    }
+
+    this.print = function() {
+        for (var i = 0; i < table.length; i++) {
+            if (table[i] !== undefined) {
+                console.log(i + ": " + table[i]);
+            }
+        }
+    }
+
+
+
+}
+console.log("--------------------------方法2--------------------------");
+var hash = new HashTable_2();
+
+// 无冲突
 hash.put("Tyrion", "1");
 hash.put("Aaron", "2");
 
