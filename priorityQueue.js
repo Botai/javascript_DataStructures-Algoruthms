@@ -56,6 +56,6 @@ function PriorityQueue() {
 }
 var priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('jhon', 2);
-priorityQueue.enqueue('jack', 1); 
+priorityQueue.enqueue('jack', 1);
 priorityQueue.enqueue('cam', 3);
 priorityQueue.print();

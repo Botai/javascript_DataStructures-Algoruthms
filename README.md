@@ -25,6 +25,7 @@ ___
     * [二叉搜索树](./binarySearchTree.js)
         * 二叉树中的节点最多只能有两个子节点：一个是左侧子节点，一个是右侧子节点。二叉搜索树是二叉树的一种，但是它只允许左侧存储节点存储小的值，在右侧节点存储大的值。
 ### 算法
-1. [汉诺伊塔](./hanoi.js)
-2. [快排](./quickSort.js)
-3. [选择排序](./sellectionSort.js)
+1. [汉诺伊塔](./algorithm/hanoi.js)
+2. [快排](./algorithm/quickSort.js)
+3. [选择排序](./algorithm/sellectionSort.js)
+4. [堆排序](./algorithm/Heapsort.js)
